@@ -115,4 +115,4 @@ class SimpleCameraTorch(SingleCameraBase):
 
             _X[..., :2] = _X_2d * (radial + tangential)[..., None] + torch.ger(
                 r2, p.flip([0])).reshape(_X_2d.shape)
-        return _X @ self.param['K']
+        return _X @ self.param['K'].float()

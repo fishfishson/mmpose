@@ -34,7 +34,8 @@ def single_gpu_test(model, data_loader):
         results.append(result)
 
         # use the first key as main key to calculate the batch size
-        batch_size = len(next(iter(data.values())))
+        batch_size = data_loader.batch_size
+        # batch_size = len(next(iter(data.values())))
         for _ in range(batch_size):
             prog_bar.update()
     return results
@@ -72,7 +73,8 @@ def multi_gpu_test(model, data_loader, tmpdir=None, gpu_collect=False):
 
         if rank == 0:
             # use the first key as main key to calculate the batch size
-            batch_size = len(next(iter(data.values())))
+            # batch_size = len(next(iter(data.values())))
+            batch_size = data_loader.batch_size
             for _ in range(batch_size * world_size):
                 prog_bar.update()
 
